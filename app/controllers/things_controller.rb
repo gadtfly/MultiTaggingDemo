@@ -27,7 +27,7 @@ class ThingsController < ApplicationController
 private
   
   def thing_params
-    params.require(:thing).permit(:name)
+    params.require(:thing).permit(:name, :tag_list)
   end
 
 end

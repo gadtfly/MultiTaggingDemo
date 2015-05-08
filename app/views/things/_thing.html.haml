@@ -1,5 +1,8 @@
 .thing
   = thing.name
+  .tags
+    Tags:
+    = render thing.tags
   .controls
     = link_to 'Edit', [:edit, thing]
     = link_to 'Destroy', thing, method: :delete
