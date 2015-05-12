@@ -17,13 +17,27 @@
 //= require_tree .
 
 $(document).ready(function(){
+  // https://jqueryui.com/autocomplete/#multiple-remote
   $('[data-autocomplete-source]').autocomplete({
+    minLength: 0,
     source: function(request, response){
       var source = $(this.element).data('autocomplete-source')
       var field = $(this.element).data('autocomplete-field')
-      $.get(source, {term: request.term}, function(data){
+      var term = request.term.split(/,\s*/).pop()
+      $.get(source, {term: term}, function(data){
         response(data.map(function(element){ return element[field] }))
       })
+    },
+    focus: function() {
+      return false;
+    },
+    select: function(event, ui) {
+      var terms = this.value.split(/,\s*/)
+      terms.pop()
+      terms.push(ui.item.value)
+      terms.push("");
+      this.value = terms.join( ", " );
+      return false;
     }
   })
 })
