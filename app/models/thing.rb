@@ -3,6 +3,7 @@ class Thing < ActiveRecord::Base
   has_many :tags, through: :taggings
 
   scope :tagged_with, ->(tag_name){ joins(:tags).where(tags: {name: tag_name}) }
+  scope :tagged_with_any, ->(tag_names){ joins(:tags).where(tags: {name: tag_names}) }
 
   def tag_list=(string)
     taggings = string.split(',').map(&:strip).reject(&:empty?).map do |tag_name|
