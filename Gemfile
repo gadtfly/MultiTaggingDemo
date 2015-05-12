@@ -46,3 +46,4 @@ group :development, :test do
 end
 
 gem 'haml-rails'
+gem 'jquery-ui-rails'

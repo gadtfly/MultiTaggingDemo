@@ -11,6 +11,19 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+  $('[data-autocomplete-source]').autocomplete({
+    source: function(request, response){
+      var source = $(this.element).data('autocomplete-source')
+      var field = $(this.element).data('autocomplete-field')
+      $.get(source, {term: request.term}, function(data){
+        response(data.map(function(element){ return element[field] }))
+      })
+    }
+  })
+})

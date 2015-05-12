@@ -4,6 +4,6 @@
     = f.text_field :name
   .field
     = f.label :tag_list
-    = f.text_field :tag_list
+    = f.text_field :tag_list, data: {'autocomplete-source' => api_tags_path, 'autocomplete-field' => :name}
   .field
     = f.submit
