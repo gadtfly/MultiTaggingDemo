@@ -4,6 +4,7 @@ class Thing < ActiveRecord::Base
 
   scope :tagged_with, ->(tag_name){ joins(:tags).where(tags: {name: tag_name}) }
   scope :tagged_with_any, ->(tag_names){ joins(:tags).where(tags: {name: tag_names}) }
+  scope :tagged_with_all, ->(tag_names){ tagged_with_any(tag_names).group('things.id').having('count(distinct tags.id) = ?', tag_names.size) }
 
   def tag_list=(string)
     taggings = string.split(',').map(&:strip).reject(&:empty?).map do |tag_name|

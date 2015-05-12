@@ -25,5 +25,15 @@ describe Thing do
         expect(Thing.tagged_with_any([:cheese, :beef])).to include(cheeseburger, steak, lasagna)
       end
     end
+
+    describe '#tagged_with_all' do
+      it "doesn't return things with only some of the specified tags" do
+        expect(Thing.tagged_with_all([:cheese, :beef])).to_not include(steak)
+      end
+
+      it 'returns things with all of the specified tags' do
+        expect(Thing.tagged_with_all([:cheese, :beef])).to include(cheeseburger, lasagna)
+      end
+    end
   end
 end
