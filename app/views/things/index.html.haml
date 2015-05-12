@@ -1,10 +1,11 @@
 .tags
+  = link_to 'Reset Filter', :things
   Add Filter:
-  = render Tag.all
+  = render Tag.all - @tags
 .things
   %h1
     Things
-    - if params[:tags]
-      (#{params[:tags].join('+')})
+    - unless @tags.empty?
+      (#{render @tags})
   = render @things
 = render 'form', thing: Thing.new

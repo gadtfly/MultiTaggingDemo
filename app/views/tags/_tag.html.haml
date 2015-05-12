@@ -1,2 +1,5 @@
 .tag
   = link_to tag.name, things_path(tags: [tag.name] | params[:tags].to_a)
+  - if params[:tags].to_a.include?(tag.name)
+    %small
+      = link_to 'x', things_path(tags: params[:tags].to_a - [tag.name])
