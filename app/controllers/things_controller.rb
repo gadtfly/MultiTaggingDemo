@@ -1,6 +1,6 @@
 class ThingsController < ApplicationController
   def index
-    @things = Thing.all
+    @things = params[:tag] ? Thing.tagged_with(params[:tag]) : Thing.all
   end
 
   def edit

@@ -2,6 +2,8 @@ class Thing < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
 
+  scope :tagged_with, ->(tag_name){ joins(:tags).where(tags: {name: tag_name}) }
+
   def tag_list=(string)
     taggings = string.split(',').map(&:strip).reject(&:empty?).map do |tag_name|
       tag = Tag.find_or_create_by(name: tag_name)

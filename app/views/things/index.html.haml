@@ -1,4 +1,10 @@
+.tags
+  Filter:
+  = render Tag.all
 .things
-  %h1 All Things
+  %h1
+    Things
+    - if params[:tag]
+      (#{params[:tag]})
   = render @things
 = render 'form', thing: Thing.new
