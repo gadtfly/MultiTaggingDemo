@@ -1,2 +1,2 @@
 .tag
-  = link_to tag.name, things_path(tag: tag.name)
+  = link_to tag.name, things_path(tags: [tag.name] | params[:tags].to_a)

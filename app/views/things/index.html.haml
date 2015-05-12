@@ -1,10 +1,10 @@
 .tags
-  Filter:
+  Add Filter:
   = render Tag.all
 .things
   %h1
     Things
-    - if params[:tag]
-      (#{params[:tag]})
+    - if params[:tags]
+      (#{params[:tags].join('+')})
   = render @things
 = render 'form', thing: Thing.new
